@@ -1,25 +1,20 @@
 import pandas as pd
 import numpy as np
-from sklearn.preprocessing import StandardScaler
 
 def load_data(file):
-    # Load CSV file
+    # Read CSV
     data = pd.read_csv(file)
 
-    # ⿡ Handle missing values - remove rows with nulls
-    data = data.dropna()
-
-    # ⿢ Remove duplicate rows
+    # Remove duplicate rows
     data = data.drop_duplicates()
 
-    # ⿣ Select only numeric columns
+    # Handle missing values (remove rows with null values)
+    data = data.dropna()
+
+    # Select only numeric columns
     numeric_data = data.select_dtypes(include=[np.number])
 
-    # ⿤ Take only first 3 columns (for 3D clustering)
+    # Take first 3 numeric columns if more exist
     numeric_data = numeric_data.iloc[:, :3]
 
-    # ⿥ Scale the data (important for K-Means)
-    scaler = StandardScaler()
-    scaled_data = scaler.fit_transform(numeric_data)
-
-    return scaled_data
+    return numeric_data  # Always return DataFrame
