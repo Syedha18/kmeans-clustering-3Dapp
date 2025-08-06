@@ -10,5 +10,5 @@ def plot_clusters(X, clusters):
         title="3D K-Means Clustering",
         labels={'color': 'Cluster'}
     )
-    fig.update_traces(marker=dict(size=5))
+    fig.update_traces(marker=dict(size=6))
     return fig
